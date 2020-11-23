@@ -1,0 +1,50 @@
+﻿@model  IPagedList<CodeFirstAppr.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+<h2>Products</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CName)
+        </td>
+        
+    </tr>
+}
+
+</table>
+@Html.PagedListPager(Model, i => Url.Action("Index", "Home" ,new { i ,search=Request.QueryString["search"]}))
